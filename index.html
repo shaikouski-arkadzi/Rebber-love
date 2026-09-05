@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <link rel="icon" type="image/png" href="icon.png" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <meta name="apple-mobile-web-app-title" content="Rubber love" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Rubber love</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="app">
+      <header class="header">
+        <div class="logo">
+          <span>♥</span>
+          Rubber love
+        </div>
+
+        <button class="profile-button">👤</button>
+      </header>
+
+      <main class="main">
+        <div class="cards-container" id="cardsContainer"></div>
+
+        <div class="actions">
+          <button
+            class="action-button dislike"
+            id="dislikeButton"
+            aria-label="Не нравится"
+          >
+            ✕
+          </button>
+
+          <button
+            class="action-button like"
+            id="likeButton"
+            aria-label="Нравится"
+          >
+            ♥
+          </button>
+        </div>
+
+        <div class="hint">
+          <span>← Skip</span>
+          <span>Like →</span>
+        </div>
+      </main>
+    </div>
+
+    <!-- Match modal -->
+
+    <div class="match-overlay" id="matchOverlay">
+      <div class="match-content">
+        <div class="match-heart">♥</div>
+
+        <h1>Это мэтч! 💕</h1>
+
+        <p>Вы понравились друг другу</p>
+
+        <div class="girl-message" id="girlMessage">
+          <div class="message-avatar">
+            <img src="./images/12 Alt FINAL Red Foxy.jpg" />
+          </div>
+
+          <div class="message-bubble">
+            <strong>Red Foxy</strong>
+            <span>Привет 👋 Встретимся сегодня в Wrapa's Dungeon 😉</span>
+          </div>
+        </div>
+
+        <button id="continueButton">Начать диалог</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,514 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  min-height: 100vh;
+
+  font-family: Inter, Arial, sans-serif;
+
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+
+  color: #222;
+
+  overflow: hidden;
+}
+
+/* APP */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+.header {
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 22px;
+  font-weight: 800;
+
+  color: #ff3d68;
+}
+
+.logo span {
+  font-size: 26px;
+}
+
+.profile-button {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f5f5f5;
+
+  font-size: 19px;
+
+  cursor: pointer;
+}
+
+/* MAIN */
+
+.main {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+/* CARDS */
+
+.cards-container {
+  position: relative;
+
+  width: min(380px, 90vw);
+  height: min(560px, 65vh);
+}
+
+/* CARD */
+
+.card {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  background: white;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+  user-select: none;
+
+  cursor: grab;
+
+  touch-action: none;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  pointer-events: none;
+}
+
+/* GRADIENT OVER IMAGE */
+
+.card::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 45%;
+
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+}
+
+/* INFO */
+
+.card-info {
+  position: absolute;
+
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+
+  z-index: 2;
+
+  color: white;
+}
+
+.card-info h2 {
+  margin: 0 0 6px;
+
+  font-size: 30px;
+}
+
+.card-info p {
+  margin: 0;
+
+  font-size: 16px;
+
+  opacity: 0.9;
+}
+
+/* SWIPE LABELS */
+
+.swipe-label {
+  position: absolute;
+
+  top: 35px;
+
+  padding: 8px 15px;
+
+  border: 3px solid;
+
+  border-radius: 8px;
+
+  font-size: 22px;
+  font-weight: 800;
+
+  opacity: 0;
+
+  z-index: 5;
+}
+
+.swipe-label.like {
+  left: 25px;
+
+  color: #22c55e;
+
+  transform: rotate(-15deg);
+}
+
+.swipe-label.dislike {
+  right: 25px;
+
+  color: #ef4444;
+
+  transform: rotate(15deg);
+}
+
+/* ACTION BUTTONS */
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  gap: 35px;
+
+  margin-top: 25px;
+}
+
+.action-button {
+  width: 68px;
+  height: 68px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  background: white;
+
+  font-size: 28px;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.action-button:hover {
+  transform: scale(1.08);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+}
+
+.action-button:active {
+  transform: scale(0.92);
+}
+
+.action-button.dislike {
+  color: #ef4444;
+}
+
+.action-button.like {
+  color: #ff3d68;
+}
+
+/* HINT */
+
+.hint {
+  display: flex;
+
+  justify-content: space-between;
+
+  width: min(150px, 80vw);
+
+  margin-top: 12px;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 13px;
+}
+
+/* MATCH */
+
+.match-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 61, 104, 0.95);
+
+  z-index: 100;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.3s ease;
+}
+
+.match-overlay.active {
+  opacity: 1;
+
+  pointer-events: auto;
+}
+
+.match-content {
+  text-align: center;
+
+  color: white;
+
+  transform: scale(0.5);
+
+  opacity: 0;
+
+  transition:
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.3s ease;
+}
+
+.match-overlay.active .match-content {
+  transform: scale(1);
+
+  opacity: 1;
+}
+
+/* HEART ANIMATION */
+
+.match-heart {
+  width: 130px;
+  height: 130px;
+
+  margin: 0 auto 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: white;
+
+  color: #ff3d68;
+
+  font-size: 75px;
+
+  animation: heartPulse 1s infinite;
+
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+}
+
+@keyframes heartPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 0 25px rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.match-content h1 {
+  margin: 0 0 10px;
+
+  font-size: 42px;
+}
+
+.match-content p {
+  margin: 0 0 30px;
+
+  font-size: 18px;
+}
+
+.match-content button {
+  padding: 14px 35px;
+
+  border: none;
+  border-radius: 30px;
+
+  background: white;
+
+  color: #ff3d68;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .header {
+    height: 60px;
+    padding: 0 16px;
+  }
+
+  .cards-container {
+    width: 90vw;
+    height: 65vh;
+  }
+
+  .card-info h2 {
+    font-size: 26px;
+  }
+
+  .actions {
+    margin-top: 18px;
+  }
+
+  .action-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .match-content h1 {
+    font-size: 34px;
+  }
+}
+
+.girl-message {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+
+  margin: 0 auto 25px;
+
+  max-width: 300px;
+
+  text-align: left;
+
+  opacity: 0;
+  transform: translateY(20px);
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.match-overlay.message-visible .girl-message {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message-avatar {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: white;
+
+  font-size: 22px;
+}
+
+.message-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 12px 16px;
+
+  background: white;
+
+  color: #222;
+
+  border-radius: 16px 16px 16px 4px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+.message-bubble strong {
+  font-size: 13px;
+
+  color: #ff3d68;
+}
+
+.message-bubble span {
+  font-size: 16px;
+}
+
+.message-avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.message-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
