@@ -418,3 +418,31 @@ document.addEventListener("keydown", (event) => {
 */
 
 renderCards();
+/*
+|--------------------------------------------------------------------------
+| STARTUP SPLASH
+|--------------------------------------------------------------------------
+*/
+
+const splashScreen = document.getElementById("splashScreen");
+const splashHeartWrap = document.getElementById("splashHeartWrap");
+const splashStart = document.getElementById("splashStart");
+
+window.addEventListener("load", () => {
+  /*
+   * Небольшая пауза после появления логотипа.
+   */
+
+  setTimeout(() => {
+    splashHeartWrap.classList.add("explode");
+    splashStart.classList.add("show");
+  }, 1050);
+
+  /*
+   * После "Начнём!" открываем приложение.
+   */
+
+  setTimeout(() => {
+    splashScreen.classList.add("hide");
+  }, 1900);
+});
